@@ -21,5 +21,5 @@ DB_NAME = os.getenv('DB_NAME')
 try:
     if os.environ['TERM_PROGRAM'] == 'vscode':
         database = f"{DB_BASE_URL}:///{BASE_DIR}/{DB_NAME}"
-except Exception:
+except KeyError:
     database = f"{DB_BASE_URL}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"

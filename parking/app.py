@@ -37,8 +37,8 @@ def create_app(test_config = None):
         Добавлен контекст процессор для отображения всех парковок
         """
         parking_all = db.session.execute(select(Parking)).scalars().all()
-        parkings = [parking.to_json() for parking in parking_all]
-        return dict(parkings = parkings)
+        _parkings = [parking.to_json() for parking in parking_all]
+        return dict(parkings = _parkings)
 
     @app.route('/')
     def index():
@@ -86,8 +86,13 @@ def create_app(test_config = None):
         return jsonify(client = client.to_json())
 
     @app.route("/parkings", methods = ["GET", "POST"])
-    def get_parking():
-        """  """
+    def parkings():
+        """
+        Method GET:
+        Displaying the entire parking list.
+        Method POST:
+        Creating a new parking lot.
+        """
 
         if request.method == 'POST':
             data = request.json
@@ -180,7 +185,7 @@ def create_app(test_config = None):
                 ).scalar()
                 if not departure.time_in:
                     return {"The client did not enter the parking lot": 404}, 404
-            except Exception:
+            except TypeError:
                 return {"Not available": 404}, 404
             departure.time_out = datetime.datetime.now()
 
