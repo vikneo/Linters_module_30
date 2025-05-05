@@ -1,13 +1,17 @@
 name: parking-ci
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# The vairiant first
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
-# permissions:
-#   contents: read
+# The vairiant second
+on: [push, pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   build:
