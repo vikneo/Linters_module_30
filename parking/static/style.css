@@ -1,0 +1,140 @@
+.flex {
+    display: flex;
+}
+
+/* ================ ОФОРМЛЕНИЕ ОБОЛОЧКИ СМАРТФОНА ================ */
+
+.smartphone-position, .select {
+    margin-top: 50px;
+    text-align: center !important;
+    justify-content: center;
+}
+
+.select {
+    margin: 20px;
+    width: 200px !important;
+}
+
+.smartphone {
+    width: 350px;
+    height: 750px;
+    border: 2px black solid;
+    border-radius: 15px;
+    background-color: #4a4295;
+}
+
+.smartphone-inside-shell {
+    margin-top: 5px;
+    text-align: center !important;
+    justify-content: center;
+    /* background-color: black; */
+}
+
+.smartphone-border {
+    width: 330px;
+    height: 685px;
+    border: 1px black solid;
+    border-radius: 15px 15px 0 0;
+    background-color: rgb(240, 239, 237);
+}
+
+.camera-position {
+    position: relative;
+    top: 2px;
+    margin: 0 auto;
+    width: 12px;
+    height: 12px;
+    border: 1px black solid;
+    border-radius: 14px;
+    background-color: #f7f9f9;
+}
+
+.content {
+    padding: 10px;
+}
+
+.navigation {
+    margin: 0 auto;
+    margin-top: 9px;
+    width: 95%;
+    height: 22px;
+    /* border: 1px black solid; */
+    align-items: center;
+}
+
+.footer {
+    margin: 0 auto;
+    max-width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-right: 18px solid #f4f7f2;
+    border-bottom: 8px solid transparent;
+}
+
+.home-btn {
+    width: 17px;
+    height: 17px;
+    background: #f4f7f2;
+    border-radius: 50%;
+}
+
+.collapse-app {
+    width: 17px;
+    height: 17px;
+    background: #f4f7f2;
+}
+
+/* ========================================== */
+
+.content, .count-parking {
+    padding: 1px;
+}
+
+.block-content {
+    margin-top: 2px;
+    height: 510px;
+    border: 1px black solid;
+    border-radius: 3px 3px 0 0;
+}
+
+.green {
+    background-color: rgb(17, 224, 35);
+}
+
+.red {
+    background-color: rgb(231, 42, 29);
+}
+
+.status-parking {
+    padding: 10px;
+    border: 1px black solid;
+    border-radius: 3px 3px 0 0;
+}
+
+.count-parking {
+    padding: 10px;
+    border: 1px black solid;
+    background-color: aqua;
+}
+
+
+/* ============================================== */
+
+.user-content {
+    width: 100%;
+    padding-top: 12px;
+}
+
+.user-title {
+    justify-content: space-around;
+}
+
+.p-size {
+    font-weight: 600;
+}
