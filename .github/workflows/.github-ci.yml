@@ -42,6 +42,10 @@ jobs:
   test-mypy:
     runs-on: ubuntu-latest
     steps:
-      - name: Test mypy
-        run:
-          mypy parking/
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run:
+        pip install -r requirements.txt
+    - name: Test mypy
+      run:
+        mypy parking/
