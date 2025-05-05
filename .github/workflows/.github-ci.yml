@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test-flake8:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -43,9 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: jashparekh/mypy-action@v4
     - name: Install dependencies
       run:
         pip install -r requirements.txt
-    - name: Test mypy
+    - name: Test mypy `${{ github.repository }}`
       run:
         mypy parking/
