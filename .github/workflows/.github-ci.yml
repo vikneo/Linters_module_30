@@ -1,14 +1,14 @@
 name: parking-ci
 
 # The vairiant first
-# on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
 
 # The vairiant second
-on: [push, pull_request]
+# on: [push, pull_request]
 
 permissions:
   contents: read
