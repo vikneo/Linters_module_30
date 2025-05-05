@@ -39,7 +39,9 @@ jobs:
         run:
           flake8 parking/
       - run: echo "Finished checking with flake8"
-      - uses: jashparekh/mypy-action@v2
+  test-mypy:
+    runs-on: ubuntu-latest
+    steps:
       - name: Test mypy
         run:
           mypy parking/
