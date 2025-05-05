@@ -1,5 +1,7 @@
 name: parking-ci
 
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
 # The vairiant first
 on:
   push:
@@ -25,10 +27,15 @@ jobs:
       - uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
+      - run: echo "Started Installing dependencies"
       - name: Install dependencies
         run:
           # python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - run: echo "Dependencies are installed"
+      - run: echo "Started checking the repository `${{ github.repository }}` with flake8"
       - name: Сhecking with flake8
         run:
           flake8 parking/
+      - run: echo "Finished checking with flake8"
+
