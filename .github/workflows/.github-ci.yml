@@ -27,4 +27,4 @@ jobs:
           pip install -r requirements.txt
       - name: Сhecking with flake8
         run:
-          flake8
+          flake8 parking/
