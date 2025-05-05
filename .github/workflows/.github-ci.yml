@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: jashparekh/mypy-action@v4
+    - uses: jashparekh/mypy-action@v3
     - name: Install dependencies
       run:
         pip install -r requirements.txt
