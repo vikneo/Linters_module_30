@@ -10,13 +10,13 @@ def create_app(test_config = None):
     Создание приложения Flask с помощью "Фабрика приложений" (Application Factory)
     """
     if test_config is None:
-        db = database
+        _db = database
     else:
-        db = "sqlite://"
+        _db = "sqlite://"
 
     app = Flask(__name__, instance_relative_config = True)
     app.secret_key = SECRET_KEY
-    app.config["SQLALCHEMY_DATABASE_URI"] = db
+    app.config["SQLALCHEMY_DATABASE_URI"] = _db
 
     from .models import db, Client, Parking, ClientParking
     db.init_app(app)

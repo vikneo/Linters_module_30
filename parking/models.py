@@ -10,12 +10,12 @@ class Base(DeclarativeBase):
     pass
 
 
-db = SQLAlchemy(
+db: SQLAlchemy = SQLAlchemy(
     model_class = Base
 )
 
 
-class Client(db.Model):
+class Client(Base):
     """
     Класс `Client` описывает модель клиента
     """
@@ -69,7 +69,7 @@ class Parking(Base):
     def __repr__(self):
         return f"Parking(address={self.address}; opened={self.opened})"
 
-    def to_json(self):
+    def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     @classmethod
@@ -93,5 +93,5 @@ class ClientParking(Base):
     def __repr__(self):
         return f"Client(id={self.client_id}); Parking(id={self.parking_id})"
 
-    def to_json(self):
+    def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
