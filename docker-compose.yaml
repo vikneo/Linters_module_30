@@ -1,0 +1,30 @@
+services:
+  app:
+    container_name: parking
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "5050:5000"
+    networks:
+      - backend
+
+  postgres:
+    container_name: app_parking
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=parking_db
+      - POSTGRES_USER=parking
+      - POSTGRES_PASSWORD=parking
+      - log_destination=stderr
+      - logging_collector=on
+      - LOG_DIRECTORY=/var/lib/postgresql/logs
+    ports:
+      - "5433:5432"
+    networks:
+      - backend
+    volumes:
+      - ./db/:/var/lib/postgresql/data
+
+networks:
+  backend:
+    driver: bridge
