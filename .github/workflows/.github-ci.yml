@@ -43,7 +43,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: jashparekh/mypy-action@v3
+    - uses: jashparekh/mypy-action@v2
+      with:
+        mypy_flags: '--verbose'
+        mypy_config_file: 'mypy.ini'
+        requirement_files: 'requirements.txt'
     - name: Install dependencies
       run:
         pip install -r requirements.txt
