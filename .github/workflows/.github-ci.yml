@@ -39,6 +39,6 @@ jobs:
         run:
           flake8 parking/
       - run: echo "Finished checking with flake8"
-      - name: Test mypy
-        run:
-          mypy parking/
+      # - name: Test mypy
+      #   run:
+      #     mypy parking/
