@@ -2,7 +2,7 @@ import datetime
 
 from flask import Flask, render_template, jsonify, request
 from sqlalchemy import inspect, select, update
-from config import SECRET_KEY, database
+from .config import SECRET_KEY, database
 
 
 def create_app(test_config = None):
@@ -18,7 +18,7 @@ def create_app(test_config = None):
     app.secret_key = SECRET_KEY
     app.config["SQLALCHEMY_DATABASE_URI"] = db
 
-    from models import db, Client, Parking, ClientParking
+    from .models import db, Client, Parking, ClientParking
     db.init_app(app)
 
     @app.before_request
