@@ -52,7 +52,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test mypy `${{ github.repository }}`
       run:
-        mypy parking/
+        mypy --check-untyped-defs parking/
   test-isort:
     runs-on: ${{ matrix.os }}
     strategy:
