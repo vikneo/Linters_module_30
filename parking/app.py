@@ -139,7 +139,7 @@ def create_app(test_config = None):
         """
         data = request.json
         client_id: int = data['client_id']  # type: ignore
-        parking_id: int = data['parking_id']
+        parking_id: int = data['parking_id']  # type: ignore
         parking_opened = db.session.execute(
             select(Parking.opened).where(Parking.id == parking_id)
         ).scalar_one()
