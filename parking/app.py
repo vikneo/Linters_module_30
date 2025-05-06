@@ -60,10 +60,10 @@ def create_app(test_config = None):
         if request.method == 'POST':
             data = request.json
             client = Client(
-                name = data['name'],
-                surname = data['surname'],
-                credit_card = data['credit_card'],
-                car_number = data['car_number']
+                name = data['name'],  # type: ignore
+                surname = data['surname'],  # type: ignore
+                credit_card = data['credit_card'],  # type: ignore
+                car_number = data['car_number']  # type: ignore
             )
 
             db.session.add(client)
@@ -97,11 +97,11 @@ def create_app(test_config = None):
         if request.method == 'POST':
             data = request.json
             parking = Parking(
-                name = data['name'],
-                address = data['address'],
-                opened = data['opened'],
-                count_places = data['count_places'],
-                count_available_places = data['count_available_places']
+                name = data['name'],  # type: ignore
+                address = data['address'],  # type: ignore
+                opened = data['opened'],  # type: ignore
+                count_places = data['count_places'],  # type: ignore
+                count_available_places = data['count_available_places']  # type: ignore
             )
             db.session.add(parking)
             db.session.commit()
@@ -138,14 +138,14 @@ def create_app(test_config = None):
         (we pass the client_id and parking_id, and increase the free space by 1)
         """
         data = request.json
-        client_id: int = data['client_id']
+        client_id: int = data['client_id']  # type: ignore
         parking_id: int = data['parking_id']
         parking_opened = db.session.execute(
             select(Parking.opened).where(Parking.id == parking_id)
-        ).scalar()
+        ).scalar_one()
         client_card = db.session.execute(
             select(Client.credit_card).where(Client.id == client_id)
-        ).scalar()
+        ).scalar_one()
 
         if request.method == 'POST':
             if not parking_opened:
@@ -170,7 +170,7 @@ def create_app(test_config = None):
                                    .values(opened = False)
                                    .where(Parking.id == parking_id))
             db.session.commit()
-            parking = db.session.execute(select(Parking).where(Parking.id == parking_id)).scalar()
+            parking: Parking = db.session.execute(select(Parking).where(Parking.id == parking_id)).scalar_one()
             client_info = {
                 "parking": parking.to_json(),
                 "card": client_card,
@@ -179,10 +179,10 @@ def create_app(test_config = None):
 
         elif request.method == 'DELETE':
             try:
-                departure = db.session.execute(
+                departure: ClientParking = db.session.execute(
                     select(ClientParking)
                     .where(ClientParking.client_id == client_id, ClientParking.parking_id == parking_id)
-                ).scalar()
+                ).scalar_one()
                 if not departure.time_in:
                     return {"The client did not enter the parking lot": 404}, 404
             except TypeError:
@@ -199,7 +199,7 @@ def create_app(test_config = None):
                 db.session.execute(update(Parking).values(opened = True).where(Parking.id == parking_id))
             db.session.commit()
 
-            parking = db.session.execute(select(Parking).where(Parking.id == parking_id)).scalar()
+            parking = db.session.execute(select(Parking).where(Parking.id == parking_id)).scalar_one()
             departure_info = {
                 "departure": departure.to_json(),
                 "payment": True,
