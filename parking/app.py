@@ -170,7 +170,9 @@ def create_app(test_config = None):
                                    .values(opened = False)
                                    .where(Parking.id == parking_id))
             db.session.commit()
-            parking: Parking = db.session.execute(select(Parking).where(Parking.id == parking_id)).scalar_one()
+            parking: Parking = db.session.execute(
+                select(Parking).where(Parking.id == parking_id)
+            ).scalar_one()
             client_info = {
                 "parking": parking.to_json(),
                 "card": client_card,
