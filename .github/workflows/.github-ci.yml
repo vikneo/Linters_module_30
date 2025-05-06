@@ -39,6 +39,7 @@ jobs:
         run:
           flake8 parking/
       - run: echo "Finished checking with flake8"
+
   test-mypy:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -53,6 +54,7 @@ jobs:
     - name: Test mypy `${{ github.repository }}`
       run:
         mypy --check-untyped-defs parking/
+
   test-isort:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -66,4 +68,19 @@ jobs:
         pip install -r requirements.txt
     - name: Test with isort `${{ github.repository }}`
       run:
-        isort --check --diff parking/
+        isort --check-only --diff --profile black parking/
+
+  test-black:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run:
+        pip install -r requirements.txt
+    - name: Test with black `${{ github.repository }}`
+      run:
+        black --diff --check parking/
