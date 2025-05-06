@@ -2,8 +2,7 @@ import datetime
 from typing import Any, Dict, List, Optional
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import (Boolean, ForeignKey, Integer, String, UniqueConstraint,
-                        select)
+from sqlalchemy import Boolean, ForeignKey, Integer, String, UniqueConstraint, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -11,28 +10,28 @@ class Base(DeclarativeBase):
     pass
 
 
-db: SQLAlchemy = SQLAlchemy(
-    model_class = Base
-)
+db: SQLAlchemy = SQLAlchemy(model_class=Base)
 
 
 class Client(Base):
     """
     Класс `Client` описывает модель клиента
     """
-    __tablename__ = 'clients'
+
+    __tablename__ = "clients"
     __table_args__ = (
-        UniqueConstraint("car_number", ),
+        UniqueConstraint(
+            "car_number",
+        ),
     )
 
-    id: Mapped[int] = mapped_column(primary_key = True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50))
     surname: Mapped[str] = mapped_column(String(50))
     credit_card: Mapped[Optional[str]] = mapped_column(String(50))
     car_number: Mapped[str] = mapped_column(String(10))
-    parkings: Mapped[List['Parking']] = relationship(
-        secondary = 'client_parking',
-        back_populates = 'clients'
+    parkings: Mapped[List["Parking"]] = relationship(
+        secondary="client_parking", back_populates="clients"
     )
 
     def __repr__(self) -> str:
@@ -51,20 +50,22 @@ class Parking(Base):
     """
     Класс `Parking` описывает модель парковки
     """
-    __tablename__ = 'parkings'
+
+    __tablename__ = "parkings"
     __table_args__ = (
-        UniqueConstraint('address', ),
+        UniqueConstraint(
+            "address",
+        ),
     )
 
-    id: Mapped[int] = mapped_column(primary_key = True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     address: Mapped[str] = mapped_column(String(100))
     name: Mapped[Optional[str]] = mapped_column(String(50))
-    opened: Mapped[Optional[bool]] = mapped_column(Boolean, default = True)
+    opened: Mapped[Optional[bool]] = mapped_column(Boolean, default=True)
     count_places: Mapped[int] = mapped_column(Integer)
     count_available_places: Mapped[int] = mapped_column(Integer)
-    clients: Mapped[List['Client']] = relationship(
-        secondary = 'client_parking',
-        back_populates = 'parkings'
+    clients: Mapped[List["Client"]] = relationship(
+        secondary="client_parking", back_populates="parkings"
     )
 
     def __repr__(self):
@@ -83,11 +84,12 @@ class ClientParking(Base):
     """
     Связывающая таблица клиента и парковки
     """
-    __tablename__ = 'client_parking'
 
-    id: Mapped[int] = mapped_column(primary_key = True)
-    client_id: Mapped[int] = mapped_column(ForeignKey('clients.id'))
-    parking_id: Mapped[int] = mapped_column(ForeignKey('parkings.id'))
+    __tablename__ = "client_parking"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    client_id: Mapped[int] = mapped_column(ForeignKey("clients.id"))
+    parking_id: Mapped[int] = mapped_column(ForeignKey("parkings.id"))
     time_in: Mapped[Optional[datetime.datetime]] = mapped_column()
     time_out: Mapped[Optional[datetime.datetime]] = mapped_column()
 
