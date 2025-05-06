@@ -68,7 +68,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test with isort `${{ github.repository }}`
       run:
-        isort --check --diff parking/
+        isort --check-only --diff --profile black parking/
 
   test-black:
     runs-on: ${{ matrix.os }}
