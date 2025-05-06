@@ -17,7 +17,7 @@ def test_index_html(client):
 
     resp = client.get("/")
     assert resp.status_code == 200
-    assert resp.headers[0] == ('Content-Type', 'text/html; charset=utf-8')
+    assert resp.headers[0] == ("Content-Type", "text/html; charset=utf-8")
 
 
 def test_page_not_found(client):
