@@ -2,6 +2,7 @@ import datetime
 
 from flask import Flask, jsonify, render_template, request
 from sqlalchemy import inspect, select, update
+from sqlalchemy.exc import NoResultFound
 
 from .config import SECRET_KEY, database
 
@@ -211,7 +212,7 @@ def create_app(test_config=None):
                 ).scalar_one()
                 if not departure.time_in:
                     return {"The client did not enter the parking lot": 404}, 404
-            except TypeError:
+            except NoResultFound:
                 return {"Not available": 404}, 404
             departure.time_out = datetime.datetime.now()
 

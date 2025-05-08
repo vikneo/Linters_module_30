@@ -3,13 +3,13 @@ from datetime import datetime
 import pytest
 from flask import Flask
 
-from src.parking.app import create_app
 
-
-def test_create_app():
+def test_create_app(app):
     """Testing a created application is Flask"""
-    app = create_app()
+
     assert isinstance(app, Flask)
+    assert app.config["TESTING"]
+    assert app.config["SQLALCHEMY_DATABASE_URI"] == "sqlite://"
 
 
 def test_index_html(client):
