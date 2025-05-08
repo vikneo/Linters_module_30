@@ -8,8 +8,8 @@ def test_create_app(app):
     """Testing a created application is Flask"""
 
     assert isinstance(app, Flask)
-    assert app.config['TESTING']
-    assert app.config['SQLALCHEMY_DATABASE_URI'] == "sqlite://"
+    assert app.config["TESTING"]
+    assert app.config["SQLALCHEMY_DATABASE_URI"] == "sqlite://"
 
 
 def test_index_html(client):
