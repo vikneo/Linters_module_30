@@ -6,10 +6,10 @@ from flask import Flask
 from src.parking.app import create_app
 
 
-def test_create_app():
+def test_create_app(app):
     """Testing a created application is Flask"""
-    _app = create_app()
-    assert isinstance(_app, Flask)
+    app = create_app()
+    assert isinstance(app, Flask)
 
 
 def test_index_html(client):
