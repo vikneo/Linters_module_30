@@ -8,8 +8,8 @@ from src.parking.app import create_app
 
 def test_create_app():
     """Testing a created application is Flask"""
-    app = create_app()
-    assert isinstance(app, Flask)
+    _app = create_app()
+    assert isinstance(_app, Flask)
 
 
 def test_index_html(client):
