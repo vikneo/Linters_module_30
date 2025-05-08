@@ -12,6 +12,7 @@ class ClientFactory(factory.alchemy.SQLAlchemyModelFactory):
         model = Client
         sqlalchemy_session = db.session
 
+    id = None
     name = _faker.first_name()
     surname = _faker.last_name()
     credit_card = fuzzy.FuzzyChoice(choices=[_faker.credit_card_number(), None])
@@ -23,6 +24,7 @@ class ParkingFactory(factory.alchemy.SQLAlchemyModelFactory):
         model = Parking
         sqlalchemy_session = db.session
 
+    id = None
     address = _faker.address()
     name = fuzzy.FuzzyText(prefix="Стоянка у ")
     opened = fuzzy.FuzzyChoice(choices=[True, False])
