@@ -9,7 +9,7 @@ ADD requirements.txt requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ADD src/parking .
-ADD src/tests .
+ADD src .
+
 EXPOSE 5000
 ENTRYPOINT ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "manage:app", "--timeout=600"]
