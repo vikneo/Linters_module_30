@@ -1,9 +1,9 @@
 from datetime import datetime
-import pytest
 
+import pytest
 from flask import Flask
 
-from parking.app import create_app
+from src.parking.app import create_app
 
 
 def test_create_app():
