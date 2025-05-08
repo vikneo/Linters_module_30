@@ -1,9 +1,10 @@
-from .factories import ClientFactory, ParkingFactory
 from src.parking.models import Client, Parking
+
+from .factories import ClientFactory, ParkingFactory
 
 
 def test_create_client(client, db):
-    """ Testing created client """
+    """Testing created client"""
 
     then_clients = db.session.query(Client).all()
     client = ClientFactory()
@@ -17,14 +18,14 @@ def test_create_client(client, db):
 
 
 def test_create_parking(client, db):
-    """ Testing created parking """
+    """Testing created parking"""
 
     then_parkings = db.session.query(Parking).all()
     parking = ParkingFactory()
     db.session.commit()
     now_parkings = db.session.query(Parking).all()
 
-    assert parking.id == 3
+    assert now_parkings.id == 3
     assert parking.name == now_parkings[-1].name
     assert len(then_parkings) < len(now_parkings)
     assert len(now_parkings) == 3
